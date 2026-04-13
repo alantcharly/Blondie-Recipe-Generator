@@ -59,10 +59,7 @@ blondie_ingredient_calculator(butter=150)
  'eggs': 1,
  'vanilla_extract': '1 tsp',
  'add-ins': '100–200g recommended (baking chocolate, chocolate chips, nuts, etc.)',
- 'optional': 'add 2 tsp cornstarch for extra tenderness, +1 egg yolk for fudgier texture, or replace some brown sugar with white for a crackly top.'![IMG_3350](https://github.com/user-attachments/assets/ccc3cce1-3e86-4a7e-885f-8d4b533eb58f)
-![IMG_3350](https://github.com/user-attachments/assets/6bb986fb-c721-4331-9630-3acc15851562)
-
-
+ 'optional': 'add 2 tsp cornstarch for extra tenderness, +1 egg yolk for fudgier texture, or replace some brown sugar with white for a crackly top.
 }
 ```
 
