@@ -75,9 +75,9 @@ The generator was tested against a [published blondie recipe](https://www.youtub
 | Vanilla | 1 tbsp | 1 tbsp ✅ |
 | Flour | 315g | 302.9g (~4% off) |
 | Total Sugar | 450g | 465g (~3% off) |
-| Baking Powder | 1 tsp | 1.25 tsp |
+| Baking Powder | 1 tsp | 1.25 tsp (~1/4 tsp difference)|
 
-Eggs and vanilla matched exactly. Flour and sugar were within normal recipe variation.
+Eggs and vanilla matched exactly. Flour and sugar were within normal recipe variation. Baking powder was 25% higher than the published recipe, which is consistent with the wide variance observed in the dataset (range: 1/4 tsp to 2 tbsp per batch).
 
 ## The Bake
 Scaled to an 8x8 pan from a 13x9 reference using surface area ratio (0.55 x 284g gives approximately 150g butter).
