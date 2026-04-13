@@ -9,7 +9,7 @@ I started baking a month ago to break a limiting belief of mine. After making my
 ## How It Works
 
 ### 1. Data Collection & Parsing
-A website parser scans recipe pages for structured ingredient data (JSON-LD format) and loads them into a pandas DataFrame. Of 35 URLs collected, 30 were successfully parsed (86%). The 5 failures were due to non-standard JSON-LD structures on those specific sites, a known limitation of schema-based scraping. Given that 30 recipes was sufficient for robust statistical analysis, further debugging was intentionally deprioritised in favour of building a working pipeline. Results may also vary slightly between runs due to network conditions.
+A website parser scans recipe pages for structured ingredient data (JSON-LD format) and loads them into a pandas DataFrame. Of 35 URLs collected, 31 were successfully parsed (86%). The 5 failures were due to non-standard JSON-LD structures on those specific sites, a known limitation of schema-based scraping. Given that 31 recipes was sufficient for robust statistical analysis, further debugging was intentionally deprioritised in favour of building a working pipeline. Results may also vary slightly between runs due to network conditions.
 
 ### 2. Data Cleaning
 This was the hardest part. Challenges included:
@@ -22,13 +22,13 @@ All ingredients were expressed as ratios relative to flour. Median was chosen ov
 
 One key insight: you can't simply chain medians. Because `median(a/b)` and `median(b/c)` don't share the same `b`, chaining them doesn't preserve consistency. The fix was to anchor everything to flour as the single base unit.
 
-Of the 30 scraped recipes, 29 were used for ratio analysis. One recipe was excluded as it used vegetable oil instead of butter. Since oil and butter behave differently in baking and are not interchangeable in ratio modelling, including it would have skewed the results.
+Of the 31 scraped recipes, 30 were used for ratio analysis. One recipe was excluded as it used vegetable oil instead of butter. Since oil and butter behave differently in baking and are not interchangeable in ratio modelling, including it would have skewed the results.
 
 ### 4. Ingredient Decisions
 
 **Butter & Sugar** — The three primary inputs (flour, butter, sugar) were chosen because they drive structure (flour), fudginess (butter/fat), and flavour and colour (brown sugar adds caramel depth and a slight brownish tinge).
 
-**Sugar** The median brown/total sugar ratio across 29 recipes was 1.0, meaning the majority of blondie recipes use all brown sugar. The mean was 0.877 (approximately 7/8 brown), with white sugar only appearing past the 75th percentile, that is, only in recipes with relatively large total sugar amounts. This suggests bakers intentionally introduce white sugar at higher quantities to dial back the molasses intensity and prevent the blondie from becoming overwhelmingly caramel-forward. White sugar also contributes to a crackly top by caramelising at the surface during baking.
+**Sugar** The median brown/total sugar ratio across 30 recipes was 1.0, meaning the majority of blondie recipes use all brown sugar. The mean was 0.877 (approximately 7/8 brown), with white sugar only appearing past the 75th percentile, that is, only in recipes with relatively large total sugar amounts. This suggests bakers intentionally introduce white sugar at higher quantities to dial back the molasses intensity and prevent the blondie from becoming overwhelmingly caramel-forward. White sugar also contributes to a crackly top by caramelising at the surface during baking.
 
 Given that the median is 1.0, the model defaults to all brown sugar. A small amount of white sugar (roughly 1/8 of total) can optionally be substituted for flavour balance and a crackly top. This is surfaced as a suggestion in the output rather than baked into the model.
 
