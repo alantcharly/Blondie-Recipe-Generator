@@ -86,5 +86,5 @@ Scaled to an 8x8 pan from a 13x9 reference using surface area ratio (0.55 x 284g
 - Ratio chaining with medians breaks: always anchor to one base variable
 - Domain knowledge is essential for validating statistical outputs, not just the numbers alone
 - Knowing the limits of your data matters as much as knowing how to analyse it
-- Sometimes a working pipeline at 86% coverage beats a perfect one at 0%
+- Sometimes a working pipeline at 89% coverage beats a perfect one at 0%
 - Data can reveal why patterns exist, not just that they exist. The white sugar finding was as much a culinary insight as a statistical one
