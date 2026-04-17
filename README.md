@@ -86,7 +86,8 @@ Eggs and vanilla matched exactly. Flour and sugar were within normal recipe vari
 ## The Bake
 Scaled to an 8x8 pan from a 13x9 reference using surface area ratio (0.55 x 284g gives approximately 150g butter).
 
-![](blondie.jpg)
+![](blondie.png)
+![](blondie_slice.png)
 
 ## What I Learned
 - Median is more robust than mean when outlier recipes skew the data
