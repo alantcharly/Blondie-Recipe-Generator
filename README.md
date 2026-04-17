@@ -1,7 +1,7 @@
 # Blondie Recipe Generator
 
 ## Overview
-A data-driven blondie recipe generator built by analysing 30 recipes scraped from the web. Instead of manually reading through recipes and making subjective choices, this project uses statistical analysis to derive ingredient ratios and generate a scaled recipe from a single input: flour, butter, or sugar.
+A data-driven blondie recipe generator built by analysing 31 recipes scraped from the web. Instead of manually reading through recipes and making subjective choices, this project uses statistical analysis to derive ingredient ratios and generate a scaled recipe from a single input: flour, butter, or sugar.
 
 ## Background
 I started baking a month ago to break a limiting belief of mine. After making my mom's brownie recipe and falling in love with the process, I wanted to experiment with blondies. Rather than picking one recipe arbitrarily, I thought: why not collect many recipes, analyse them, and let the data guide the decisions?
@@ -10,6 +10,8 @@ I started baking a month ago to break a limiting belief of mine. After making my
 
 ### 1. Data Collection & Parsing
 A website parser scans recipe pages for structured ingredient data (JSON-LD format) and loads them into a pandas DataFrame. Of 35 URLs collected, 31 were successfully parsed (89%). The 4 failures were due to non-standard JSON-LD structures on those specific sites, a known limitation of schema-based scraping. Given that 31 recipes was sufficient for robust statistical analysis, further debugging was intentionally deprioritised in favour of building a working pipeline. Results may also vary slightly between runs due to network conditions.
+
+The processed dataframes are saved as CSVs in the repository. Load these directly to skip the scraping and cleaning pipeline.
 
 ### 2. Data Cleaning
 This was the hardest part. Challenges included:
@@ -24,9 +26,12 @@ One key insight: you can't simply chain medians. Because `median(a/b)` and `medi
 
 Of the 31 scraped recipes, 30 were used for ratio analysis. One recipe was excluded as it used vegetable oil instead of butter. Since oil and butter behave differently in baking and are not interchangeable in ratio modelling, including it would have skewed the results.
 
-### 4. Ingredient Decisions
+### 4. Exploring Spoonacular API as an Alternative Data Source
+The Spoonacular API was explored as a potential replacement and supplement for the JSON-LD scraper. However, across 5 different search queries, only 1 unique blondie recipe was returned — insufficient for meaningful analysis. The original scraper was retained as the primary data collection method.
 
-**Butter & Sugar** — The three primary inputs (flour, butter, sugar) were chosen because they drive structure (flour), fudginess (butter/fat), and flavour and colour (brown sugar adds caramel depth and a slight brownish tinge).
+### 5. Ingredient Decisions
+
+**Butter & Sugar** The three primary inputs (flour, butter, sugar) were chosen because they drive structure (flour), fudginess (butter/fat), and flavour and colour (brown sugar adds caramel depth and a slight brownish tinge).
 
 **Sugar** The median brown/total sugar ratio across 30 recipes was 1.0, meaning the majority of blondie recipes use all brown sugar. The mean was 0.877 (approximately 7/8 brown), with white sugar only appearing past the 75th percentile, that is, only in recipes with relatively large total sugar amounts. This suggests bakers intentionally introduce white sugar at higher quantities to dial back the molasses intensity and prevent the blondie from becoming overwhelmingly caramel-forward. White sugar also contributes to a crackly top by caramelising at the surface during baking.
 
@@ -34,13 +39,13 @@ Given that the median is 1.0, the model defaults to all brown sugar. A small amo
 
 **Eggs** Kept as whole egg counts rather than grams, since real recipes use 1 or 2 eggs. Egg yolks were considered for modelling but added complexity, so they became an optional suggestion in the output instead.
 
-**Baking Powder vs Baking Soda** Some recipes used baking soda, some used baking powder. Baking soda requires an acidic component to activate (brown sugar qualifies, but not always reliably). For modelling simplicity and wider applicability, everything was standardised to baking powder. Amounts were converted from tsp/tbsp to grams for ratio analysis, then converted back to tsp for the output. 25 of 30 recipes used a baking powder or baking soda measurement that could be standardised.
+**Baking Powder vs Baking Soda** Some recipes used baking soda, some used baking powder. Baking soda requires an acidic component to activate (brown sugar qualifies, but not always reliably). For modelling simplicity and wider applicability, everything was standardised to baking powder. Amounts were converted from tsp/tbsp to grams for ratio analysis, then converted back to tsp for the output. 25 of 31 recipes used a baking powder or baking soda measurement that could be standardised.
 
-**Vanilla** Compared against flour weight across the 29 recipes used for ratio analysis, and converted back to tsp/tbsp for the output.
+**Vanilla** Compared against flour weight across the 30 recipes used for ratio analysis, and converted back to tsp/tbsp for the output.
 
-**Cornstarch** Only 3 of 30 recipes used it, too small a sample for a reliable ratio. However, from personal experience with cookies, cornstarch adds chewiness and tenderness. Since blondies are essentially a thicker, more runny cookie dough, it is included as an optional suggestion rather than a core ingredient.
+**Cornstarch** Only 3 of 31 recipes used it, too small a sample for a reliable ratio. However, from personal experience with cookies, cornstarch adds chewiness and tenderness. Since blondies are essentially a thicker, more runny cookie dough, it is included as an optional suggestion rather than a core ingredient.
 
-**Add-ins** Chocolate chips, nuts, and other mix-ins were catalogued but excluded from structural modelling since they don't significantly affect the blondie's base texture. A general guideline of 100-200g is suggested in the output.
+**Add-ins** Chocolate chips, nuts, and other mix-ins were catalogued but excluded from structural modelling since they don't significantly affect the blondie's base texture. A general guideline of 100-200g is suggested in the cooking instructions.
 
 ## The Generator
 
@@ -53,15 +58,17 @@ blondie_ingredient_calculator(butter=150)
 ```
 {
   'flour_g': 160.0,
- 'baking_powder': '3/4 tsp',
- 'butter_g': 150.0,
- 'brown_sugar_g': 245.6,
- 'eggs': 1,
- 'vanilla_extract': '1 tsp',
- 'add-ins': '100–200g recommended (baking chocolate, chocolate chips, nuts, etc.)',
- 'optional': 'add 2 tsp cornstarch for extra tenderness, +1 egg yolk for fudgier texture, or replace some brown sugar with white for a crackly top.
+  'baking_powder': '3/4 tsp',
+  'butter_g': 150.0,
+  'brown_sugar_g': 245.6,
+  'eggs': 1,
+  'vanilla_extract': '1 tsp',
+  'optional': 'Add 2 tsp cornstarch for extra tenderness, an extra egg yolk for maximum fudginess, or both!'
 }
 ```
+
+## Try it Live
+Coming soon — will be hosted on Hugging Face Spaces.
 
 ## Validation
 The generator was tested against a [published blondie recipe](https://www.youtube.com/shorts/R8UGYcHOZM8) from [Benjamin Delwiche (@benjaminthebaker)](https://www.youtube.com/@benjaminthebaker), a baking content creator and cookbook author known for his science-driven approach to baking. The recipe uses 284g butter for a 13x9 pan.
@@ -72,7 +79,7 @@ The generator was tested against a [published blondie recipe](https://www.youtub
 | Vanilla | 1 tbsp | 1 tbsp ✅ |
 | Flour | 315g | 302.9g (~4% off) |
 | Total Sugar | 450g | 465g (~3% off) |
-| Baking Powder | 1 tsp | 1.25 tsp (~1/4 tsp difference)|
+| Baking Powder | 1 tsp | 1.25 tsp (~1/4 tsp difference) |
 
 Eggs and vanilla matched exactly. Flour and sugar were within normal recipe variation. Baking powder was 25% higher than the published recipe, which is consistent with the wide variance observed in the dataset (range: 1/4 tsp to 2 tbsp per batch).
 
@@ -86,5 +93,5 @@ Scaled to an 8x8 pan from a 13x9 reference using surface area ratio (0.55 x 284g
 - Ratio chaining with medians breaks: always anchor to one base variable
 - Domain knowledge is essential for validating statistical outputs, not just the numbers alone
 - Knowing the limits of your data matters as much as knowing how to analyse it
-- Sometimes a working pipeline at 86% coverage beats a perfect one at 0%
+- Sometimes a working pipeline at 89% coverage beats a perfect one at 0%
 - Data can reveal why patterns exist, not just that they exist. The white sugar finding was as much a culinary insight as a statistical one
