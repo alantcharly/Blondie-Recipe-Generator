@@ -68,7 +68,7 @@ blondie_ingredient_calculator(butter=150)
 ```
 
 ## Try it Live
-Coming soon — will be hosted on Hugging Face Spaces.
+[Blondie Recipe Generator](https://alantcharly-blondie-recipe-generator.hf.space/)
 
 ## Validation
 The generator was tested against a [published blondie recipe](https://www.youtube.com/shorts/R8UGYcHOZM8) from [Benjamin Delwiche (@benjaminthebaker)](https://www.youtube.com/@benjaminthebaker), a baking content creator and cookbook author known for his science-driven approach to baking. The recipe uses 284g butter for a 13x9 pan.
