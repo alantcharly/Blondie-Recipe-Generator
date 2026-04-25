@@ -48,26 +48,6 @@ Given that the median is 1.0, the model defaults to all brown sugar. A small amo
 **Add-ins** Chocolate chips, nuts, and other mix-ins were catalogued but excluded from structural modelling since they don't significantly affect the blondie's base texture. A general guideline of 100-200g is suggested in the cooking instructions.
 
 ## The Generator
-
-Input any one of: flour (g), butter (g), or sugar (g)
-
-```python
-blondie_ingredient_calculator(butter=150)
-```
-
-```
-{
-  'flour_g': 160.0,
-  'baking_powder': '3/4 tsp',
-  'butter_g': 150.0,
-  'brown_sugar_g': 245.6,
-  'eggs': 1,
-  'vanilla_extract': '1 tsp',
-  'optional': 'Add 2 tsp cornstarch for extra tenderness, an extra egg yolk for maximum fudginess, or both!'
-}
-```
-
-## Try it Live
 [Blondie Recipe Generator](https://alantcharly-blondie-recipe-generator.hf.space/)
 
 ## Validation
