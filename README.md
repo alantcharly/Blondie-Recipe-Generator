@@ -3,8 +3,17 @@
 ## Overview
 A data-driven blondie recipe generator built by analysing 31 recipes scraped from the web. Instead of manually reading through recipes and making subjective choices, this project uses statistical analysis to derive ingredient ratios and generate a scaled recipe from a single input: flour, butter, or sugar.
 
+## Built With
+- **Python** — core language
+- **Jupyter Notebook** — development and analysis environment
+- **pandas** — data cleaning and ratio analysis
+- **BeautifulSoup / requests** — web scraping and JSON-LD parsing
+- **Gradio** — interactive UI
+- **dotenv** — API key management
+- **Hugging Face Spaces** — deployment
+
 ## Background
-I started baking a month ago to break a limiting belief of mine. After making my mom's brownie recipe and falling in love with the process, I wanted to experiment with blondies. Rather than picking one recipe arbitrarily, I thought: why not collect many recipes, analyse them, and let the data guide the decisions?
+I started baking to break a limiting belief of mine. The first thing I ever baked solo was my mom's brownie recipe, and after falling in love with the process, I wanted to experiment with blondies — brownies without the chocolate, flavoured with brown sugar instead. Rather than picking one recipe arbitrarily, I thought: why not collect many recipes, analyse them, and let the data guide the decisions?
 
 ## How It Works
 
