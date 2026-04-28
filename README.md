@@ -12,6 +12,8 @@ A data-driven blondie recipe generator built by analysing 31 recipes scraped fro
 - **dotenv** — API key management
 - **Hugging Face Spaces** — deployment
 
+📄 [Data Dictionary](DATA_DICTIONARY.md) — schema reference for all CSV files used in this project
+
 ## Background
 I started baking to break a limiting belief of mine. The first thing I ever baked solo was my mom's brownie recipe, and after falling in love with the process, I wanted to experiment with blondies — brownies without the chocolate, flavoured with brown sugar instead. Rather than picking one recipe arbitrarily, I thought: why not collect many recipes, analyse them, and let the data guide the decisions?
 
